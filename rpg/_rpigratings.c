@@ -19,8 +19,9 @@
 
 
 // Sjulsonlab modification: changing this from wiringPi pin 1 to 
-// to wiringPi pin 16 (GPIO15, DIO6) for Yi's breakout board
-#define FRAMEOUTPIN 16
+// to wiringPi pin 11 (GPIO7, DIO1) for Yi's breakout board
+// (this will probably change again)
+#define FRAMEOUTPIN 11
 
 #define ANGLE_0 -1
 #define ANGLE_90 -2
