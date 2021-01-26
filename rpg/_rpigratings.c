@@ -17,6 +17,11 @@
 #include <stdbool.h>
 #include <linux/fb.h>
 
+
+// Sjulsonlab modification: changing this from wiringPi pin 1 to 
+// to wiringPi pin 16 (GPIO15, DIO6) for Yi's breakout board
+#define FRAMEOUTPIN 16
+
 #define ANGLE_0 -1
 #define ANGLE_90 -2
 #define ANGLE_180 -3
@@ -783,8 +788,8 @@ int convert_raw(char* filename, char* new_filename, int n_frames, int width, int
 
 double* display_raw(void *frame_data, fb_config* fb0, int trig_pin, int colormode) {
 
-	pinMode(1, OUTPUT);
-	digitalWrite(1, LOW);
+	pinMode(FRAMEOUTPIN, OUTPUT);
+	digitalWrite(FRAMEOUTPIN, LOW);
 	if (trig_pin > 0) {
 		pinMode(trig_pin, INPUT);
 		while (digitalRead(trig_pin) == 0) {
@@ -840,9 +845,9 @@ double* display_raw(void *frame_data, fb_config* fb0, int trig_pin, int colormod
 		for (waits = 0; waits < refresh_per_frame; waits++) {
 			ioctl(fb0->framebuffer, FBIO_WAITFORVSYNC, &dummy);
 			if (waits == 0) {
-				digitalWrite(1,HIGH);
+				digitalWrite(FRAMEOUTPIN, HIGH);
 				usleep(2000);
-				digitalWrite(1,LOW);
+				digitalWrite(FRAMEOUTPIN, LOW);
 			}
 		}
 		if (t != 0) {
@@ -856,8 +861,8 @@ double* display_raw(void *frame_data, fb_config* fb0, int trig_pin, int colormod
 
 double* display_grating(void* frame_data, fb_config* fb0, int trig_pin, int colormode){
 
-	pinMode(1, OUTPUT);
-	digitalWrite(1, LOW);
+	pinMode(FRAMEOUTPIN, OUTPUT);
+	digitalWrite(FRAMEOUTPIN, LOW);
 	if (trig_pin > 0) {
 		pinMode(trig_pin, INPUT);
 		while (digitalRead(trig_pin) == 0) {
@@ -915,9 +920,9 @@ double* display_grating(void* frame_data, fb_config* fb0, int trig_pin, int colo
 		}
 		flip_buffer(fb0);
 		ioctl(fb0->framebuffer, FBIO_WAITFORVSYNC, &dummy);
-		digitalWrite(1,HIGH);
+		digitalWrite(FRAMEOUTPIN, HIGH);
 		usleep(2000);
-		digitalWrite(1,LOW);
+		digitalWrite(FRAMEOUTPIN, LOW);
 		if (t != 0) {
 			timings[t-1] = cmp_times(frame_end, frame_start);
 		}
@@ -963,9 +968,9 @@ int display_color(fb_config* fb0, uint16_t color_16, uint24_t color_24, int colo
 	flip_buffer(fb0);
 	if(blocking){
 		ioctl(fb0->framebuffer, FBIO_WAITFORVSYNC, &dummy);
-		digitalWrite(1,HIGH);
+		digitalWrite(FRAMEOUTPIN, HIGH);
 		usleep(2000);
-		digitalWrite(1,LOW);
+		digitalWrite(FRAMEOUTPIN, LOW);
 	}
 	return 0;
 }
