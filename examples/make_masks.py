@@ -13,4 +13,4 @@ options = {"duration": 2,
           }
 
 #build those gratings and save them all in one folder for playback.
-rpg.build_list_of_gratings("grating", "~/visualstim/gratings", options)
+rpg.build_list_of_gratings("mask", "~/visualstim/masks", options)
