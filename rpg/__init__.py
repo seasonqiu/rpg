@@ -228,7 +228,8 @@ def build_list_of_gratings(func_string, directory_path, options):
     for val in options[iterable[0]]:
         options_copy = options.copy()
         options_copy[iterable[0]] = val
-        func(str(val) + '.' + func_string, options_copy) # changed this so stimulus files would be named
+        fname = str(val) + '.' + func_string
+        func(fname, options_copy) # changed this so stimulus files would be named
 
     os.chdir(cwd)
 
