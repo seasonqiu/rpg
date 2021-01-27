@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # This script loads an example image from the scipy library
 # and then converts it to a format suitable for conversion
 # with rpg.convert_raw(). Use this as a basis for converting

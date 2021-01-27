@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import rpg
 
 #Make a standard list of 12 gratings, with a circular centered mask
